@@ -12,25 +12,29 @@ void setupOLED(){
     display.setTextSize(2);
     display.setTextColor(WHITE);
     display.setCursor(0, 0);
-    display.println("Welcome");
+    display.println("Welcome...");
     display.display();
     delay(2000); // Pause for 2 seconds
 }
 
-void printOLED(int temp, int humid, int HeartRate){
-    String tempStr = String(temp);
-    String humidStr = String(humid);
-    String heartRateStr = String(HeartRate);
-
+void printOLED(int temp, int humid, int heartRate) {
     display.clearDisplay();
     display.setTextSize(1);
-    display.setTextColor(WHITE);
+    display.setTextColor(SSD1306_WHITE);  // Always use the named constant
+
     display.setCursor(0, 0);
-    display.println("Temp: " + tempStr);
-    display.println("Humidity: " + humidStr);
-    display.println("HeartRate: " + heartRateStr);
+    display.print("Temp: ");
+    display.println(temp);
+
+    display.print("Humidity: ");
+    display.println(humid);
+
+    display.print("HeartRate: ");
+    display.println(heartRate);
+
     display.display();
-} 
+    delay(3000);
+}
 
 
 

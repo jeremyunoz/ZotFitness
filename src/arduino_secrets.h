@@ -3,6 +3,6 @@
 #define _ARDUINO_SECRETS_H_
 
 #define SECRET_SSID     "BitHacks"
-#define SECRET_PASS     "BitHack2025!"
+#define SECRET_PASS     "BitHacks2025!"
 
 #endif

@@ -8,6 +8,6 @@
 void printWiFiStatus();
 
 // set up arduino wifi 
-bool configureArduinoWifi();    
+void configureArduinoWifi();    
 
 #endif
