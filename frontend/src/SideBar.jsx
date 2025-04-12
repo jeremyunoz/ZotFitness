@@ -7,11 +7,10 @@ export default function SideBar() {
   const navigate = useNavigate();
 
   const isActive = (path) => location.pathname === path;
-  console.log(location.pathname);
   return (
     <Card.Root
       marginTop={8}
-      maxWidth={"15%"}
+      width={"15%"}
       minHeight={"70vh"}
       marginLeft={"5vh"}
       bg="#222222"
@@ -36,9 +35,14 @@ export default function SideBar() {
             height={"6vh"}
             alignContent="left"
             fontSize={16}
+            justifyContent="flex-start"
           >
-            <MdDashboard />
-            Dashboard
+            <HStack width="100%" spacing={3}>
+              <MdDashboard />
+              <Text flex="1" overflow={"hidden"}>
+                Dashboard
+              </Text>
+            </HStack>
           </Button>
           <Button
             variant={isActive("/history") ? "solid" : "ghost"}
@@ -47,9 +51,14 @@ export default function SideBar() {
             height={"6vh"}
             alignContent="left"
             fontSize={16}
+            justifyContent="flex-start"
           >
-            <MdHistory />
-            History
+            <HStack width="100%" spacing={3}>
+              <MdHistory />
+              <Text flex="1" overflow={"hidden"}>
+                History
+              </Text>
+            </HStack>
           </Button>
         </VStack>
       </Card.Body>

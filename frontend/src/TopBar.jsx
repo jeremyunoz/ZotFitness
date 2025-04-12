@@ -6,7 +6,7 @@ export default function TopBar() {
     <>
       <Card.Root
         marginTop={8}
-        maxWidth={"90%"}
+        maxWidth={"94.5%"}
         maxHeight={"10vh"}
         mx={"auto"}
         bgColor={"#222222"}
