@@ -10,7 +10,9 @@ export default function MetricsCard({ title, icon, data, unit }) {
         <Card.Header>
           <HStack gap={"4%"} alignItems={"center"}>
             <Icon as={icon} boxSize={6} color={"red.500"} />
-            <Text fontSize={"20px"}>{title}</Text>
+            <Text fontSize={"20px"} textWrap={"nowrap"}>
+              {title}
+            </Text>
           </HStack>
         </Card.Header>
         <Card.Body>

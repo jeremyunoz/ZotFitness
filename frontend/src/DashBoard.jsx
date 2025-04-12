@@ -2,7 +2,8 @@ import TopBar from "./TopBar";
 import SideBar from "./SideBar";
 import MetricsCard from "./MetricsCard";
 import PageTitle from "./PageTitle";
-import { Flex, Box } from "@chakra-ui/react";
+import GeminiPanel from "./GeminiPanel";
+import { Flex, Box, HStack } from "@chakra-ui/react";
 import { FaHeart, FaTemperatureHigh, FaTint, FaWater } from "react-icons/fa";
 
 export default function Dashboard() {
@@ -23,31 +24,34 @@ export default function Dashboard() {
       <TopBar></TopBar>
       <Flex
         flexDir={{ base: "column", md: "row" }}
-        gap={10}
+        gap={5}
         justifyContent={"left"}
       >
         <SideBar />
         <Flex flexDir={"column"}>
           <PageTitle title="Dashboard" />
-          <Flex
-            marginTop={2}
-            wrap="wrap"
-            gap={5}
-            paddingTop={5}
-            paddingLeft={"1%"}
-            alignSelf="flex-start"
-          >
-            {metrics.map((metric, index) => (
-              <Box key={index} width={{ base: "100%", md: "calc(35%)" }}>
-                <MetricsCard
-                  title={metric.title}
-                  icon={metric.icon}
-                  data={metric.data}
-                  unit={metric.unit}
-                />
-              </Box>
-            ))}
-          </Flex>
+          <HStack gap={"-10vh"}>
+            <Flex
+              marginTop={2}
+              wrap="wrap"
+              gap={5}
+              paddingTop={5}
+              paddingLeft={"1%"}
+              alignSelf="flex-start"
+            >
+              {metrics.map((metric, index) => (
+                <Box key={index} width={"280px"}>
+                  <MetricsCard
+                    title={metric.title}
+                    icon={metric.icon}
+                    data={metric.data}
+                    unit={metric.unit}
+                  />
+                </Box>
+              ))}
+            </Flex>
+            <GeminiPanel></GeminiPanel>
+          </HStack>
         </Flex>
       </Flex>
     </>

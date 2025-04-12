@@ -10,8 +10,8 @@ export default function SideBar() {
   return (
     <Card.Root
       marginTop={8}
-      width={"15%"}
-      minHeight={"70vh"}
+      minWidth={"210px"}
+      height={"79vh"}
       marginLeft={"5vh"}
       bg="#222222"
       paddingTop={0}
@@ -22,6 +22,7 @@ export default function SideBar() {
         textStyle="lg"
         fontStyle={"italic"}
         fontWeight={500}
+        fontSize={"20px"}
       >
         MENU
       </Text>

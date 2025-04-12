@@ -41,7 +41,7 @@ export default function DataTable() {
       borderWidth="1px"
       rounded="md"
       width="130vh"
-      height={"60vh"}
+      height={"68vh"}
       marginTop={8}
       borderColor={"gray.500"}
     >
