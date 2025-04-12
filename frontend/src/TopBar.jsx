@@ -17,7 +17,6 @@ export default function TopBar() {
             <Text fontSize={"20px"}>ZotFitness</Text>
           </HStack>
         </Card.Body>
-        <Card.Footer />
       </Card.Root>
     </>
   );
