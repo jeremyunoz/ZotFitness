@@ -4,8 +4,10 @@
 #include "arduino_secrets.h"
 #include "WiFiS3.h"
 
+// print current wifi status
 void printWiFiStatus();
 
-bool setUpArduinoWifi();    
+// set up arduino wifi 
+bool configureArduinoWifi();    
 
 #endif

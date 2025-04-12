@@ -5,7 +5,6 @@ char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASS;
 
 int status = WL_IDLE_STATUS;
-WiFiServer server(80);
 
 void printWiFiStatus() {
   Serial.print("SSID: ");
