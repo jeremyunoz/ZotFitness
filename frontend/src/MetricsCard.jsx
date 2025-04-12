@@ -1,9 +1,12 @@
 import { HStack, Card, Button, VStack, Text, Icon } from "@chakra-ui/react";
+import { useState } from "react";
 
 export default function MetricsCard({ title, icon, data, unit }) {
+  const [currentData, setCurrentData] = useState(data);
+
   return (
     <>
-      <Card.Root>
+      <Card.Root bgColor={"#222222"}>
         <Card.Header>
           <HStack gap={2} alignItems={"center"}>
             <Icon as={icon} boxSize={6} color={"red.500"} />
@@ -13,7 +16,7 @@ export default function MetricsCard({ title, icon, data, unit }) {
         <Card.Body>
           <VStack alignItems={"center"}>
             <Text fontSize={"30px"}>
-              {data} {unit}
+              {currentData} {unit}
             </Text>
           </VStack>
         </Card.Body>
@@ -28,8 +31,9 @@ export default function MetricsCard({ title, icon, data, unit }) {
               color: "black",
               borderColor: "white",
             }}
+            onClick={() => setCurrentData(0)}
           >
-            Save
+            Reset
           </Button>
         </Card.Footer>
       </Card.Root>
