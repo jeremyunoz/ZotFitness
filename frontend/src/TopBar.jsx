@@ -16,13 +16,14 @@ import { CiSaveDown2 } from "react-icons/ci";
 import { useState } from "react";
 
 export default function TopBar() {
-  const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
 
   function handleSave() {
-    // Logic to save the user ID
-    console.log("User ID saved:", userId);
+    console.log("User Name saved:", userName);
   }
-
+  function handleClose() {
+    setUserName("");
+  }
   return (
     <>
       <Card.Root
@@ -68,30 +69,39 @@ export default function TopBar() {
                   <Dialog.Body>
                     <VStack alignItems={"left"} marginTop={-2}>
                       <Text>
-                        Enter your unique user ID here to save your body
+                        Enter your unique user name here to save your body
                         measures.
                       </Text>
                       <Text color="white" mb={2} fontStyle={"italic"}>
-                        Unique User ID:
+                        Unique User Name:
                       </Text>
                       <Input
-                        placeholder="Enter your ID"
+                        placeholder="Enter your user name"
                         bg="black"
-                        value={userId}
-                        onChange={(e) => setUserId(e.target.value)}
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
                       />
                     </VStack>
                   </Dialog.Body>
                   <Dialog.Footer>
                     <Dialog.ActionTrigger asChild>
-                      <Button variant="outline">Cancel</Button>
+                      <Button variant="outline" onClick={handleClose}>
+                        Cancel
+                      </Button>
                     </Dialog.ActionTrigger>
                     <Dialog.ActionTrigger asChild>
-                      <Button onClick={() => handleSave()}>Save</Button>
+                      <Button
+                        onClick={() => {
+                          handleSave();
+                          handleClose();
+                        }}
+                      >
+                        Save
+                      </Button>
                     </Dialog.ActionTrigger>
                   </Dialog.Footer>
                   <Dialog.CloseTrigger asChild>
-                    <CloseButton size="sm" />
+                    <CloseButton size="sm" onClick={handleClose} />
                   </Dialog.CloseTrigger>
                 </Dialog.Content>
               </Dialog.Positioner>
