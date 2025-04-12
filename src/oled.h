@@ -2,15 +2,15 @@
 #define _OLED_H_
 
 #include <SPI.h>
-#include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x3D ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+
+extern Adafruit_SSD1306 display;
 
 #define NUMFLAKES     10 // Number of snowflakes in the animation example
 
@@ -36,6 +36,7 @@ static const unsigned char PROGMEM logo_bmp[] =
 
 void setupOLED();
 
-void printOLED(String temp, String humid, String Steps, String HeartRate);
+void printOLED(int temp, int humid, int HeartRate);
+
 
 #endif //EOF OLED.h
