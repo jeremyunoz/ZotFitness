@@ -21,3 +21,6 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 - **Motion/activity detection** using accelerometer
 - Live data visualization on **OLED displays**
 - Future support for **cloud integration** and AI-based health feedbacks
+
+## Reference
+- Arduino UNO R4 WIFI: https://docs.arduino.cc/hardware/uno-r4-wifi/
