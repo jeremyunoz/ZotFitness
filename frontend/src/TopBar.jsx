@@ -14,16 +14,16 @@ import {
 import { Bars3BottomLeftIcon } from "@heroicons/react/16/solid";
 import { CiSaveDown2 } from "react-icons/ci";
 import { useState } from "react";
+import { CreateItem } from "./UploadToDB";
 
 export default function TopBar() {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserId] = useState("");
 
   function handleSave() {
-    console.log("User Name saved:", userName);
+    console.log(`saved ${userName}`);
+    CreateItem(userName);
   }
-  function handleClose() {
-    setUserName("");
-  }
+
   return (
     <>
       <Card.Root
@@ -69,39 +69,30 @@ export default function TopBar() {
                   <Dialog.Body>
                     <VStack alignItems={"left"} marginTop={-2}>
                       <Text>
-                        Enter your unique user name here to save your body
+                        Enter your unique user ID here to save your body
                         measures.
                       </Text>
                       <Text color="white" mb={2} fontStyle={"italic"}>
-                        Unique User Name:
+                        Unique User ID:
                       </Text>
                       <Input
-                        placeholder="Enter your user name"
+                        placeholder="Enter your ID"
                         bg="black"
                         value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
+                        onChange={(e) => setUserId(e.target.value)}
                       />
                     </VStack>
                   </Dialog.Body>
                   <Dialog.Footer>
                     <Dialog.ActionTrigger asChild>
-                      <Button variant="outline" onClick={handleClose}>
-                        Cancel
-                      </Button>
+                      <Button variant="outline">Cancel</Button>
                     </Dialog.ActionTrigger>
                     <Dialog.ActionTrigger asChild>
-                      <Button
-                        onClick={() => {
-                          handleSave();
-                          handleClose();
-                        }}
-                      >
-                        Save
-                      </Button>
+                      <Button onClick={handleSave}>Save to DynamoDB</Button>
                     </Dialog.ActionTrigger>
                   </Dialog.Footer>
                   <Dialog.CloseTrigger asChild>
-                    <CloseButton size="sm" onClick={handleClose} />
+                    <CloseButton size="sm" />
                   </Dialog.CloseTrigger>
                 </Dialog.Content>
               </Dialog.Positioner>
