@@ -1,7 +1,11 @@
 #include "tempHumSensor.h"
 
-void setupATHT20() {
-    Serial.begin(115200);
+Adafruit_AHTX0 aht;
+Adafruit_Sensor *aht_humidity, *aht_temp;
+sensors_event_t temp;
+sensors_event_t humidity;
+
+void setupAHT20() {
     while (!Serial)
         delay(10); // will pause Zero, Leonardo, etc until serial console opens
 
@@ -24,7 +28,6 @@ void setupATHT20() {
 
 int getTemperature(){
     // Get humidity and temperature readings
-    sensors_event_t temp;
     aht_temp->getEvent(&temp);
     Serial.print("Temperature: ");
     Serial.print(temp.temperature);
@@ -34,7 +37,6 @@ int getTemperature(){
 
 int getHumidity(){
     // Get humidity and temperature readings
-    sensors_event_t humidity;
     aht_humidity->getEvent(&humidity);
     Serial.print("Humidity: ");
     Serial.print(humidity.relative_humidity);

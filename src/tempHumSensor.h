@@ -3,9 +3,6 @@
 
 #include <Adafruit_AHTX0.h>
 
-extern Adafruit_AHTX0 aht;
-extern Adafruit_Sensor *aht_humidity, *aht_temp;
-
 void setupAHT20();
 
 int getTemperature();
