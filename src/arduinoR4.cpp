@@ -1,8 +1,9 @@
 #include "arduinoR4.h"
 
-
-char ssid[] = SECRET_SSID;
-char pass[] = SECRET_PASS;
+const char*  ssid = "BitHacks";
+const char*  pass = "BitHacks2025!";
+const char* thingName = "arduinoR4WiFi";
+const int port = 8883;
 
 int status = WL_IDLE_STATUS;
 
@@ -18,32 +19,80 @@ void printWiFiStatus() {
   Serial.println(ip);
 }
 
-void configureArduinoWifi() {
-    while (!Serial) { ; }
+void configureWifi() {
+    while (!Serial) { delay(10); }
 
     Serial.println("Connecting to WiFi...");
 
-    if (WiFi.status() == WL_NO_MODULE) {
-        Serial.println("Communication with WiFi module failed!");
-        while (true);
+    WiFi.mode(WIFI_STA);  // Set to station mode
+    WiFi.begin(ssid, pass);
+
+    // Wait for connection
+    while (WiFi.status() != WL_CONNECTED) {
+        Serial.print(".");
+        delay(500);
     }
 
-    String fv = WiFi.firmwareVersion();
-    if (fv < WIFI_FIRMWARE_LATEST_VERSION) {
-        Serial.println("Please upgrade the firmware");
-    }
-
-    // Attempt to connect to WiFi network
-    while (status != WL_CONNECTED) {
-        Serial.print("Attempting to connect to SSID: ");
-        Serial.println(ssid);
-
-        status = WiFi.begin(ssid, pass);
-
-        delay(10000);  // wait 10 seconds for connection
-    }
-
-    Serial.println("Connected to WiFi!");
+    Serial.println("\nConnected to WiFi!");
     printWiFiStatus();
 }
+
+void connectAWS(WiFiClientSecure& net, MQTTClient& client) {
+    // Configure WiFiClientSecure to use the AWS IoT device credentials
+    net.setCACert(AWS_CERT_CA);
+    net.setCertificate(AWS_CERT_CRT);
+    net.setPrivateKey(AWS_CERT_PRIVATE);
+
+    client.begin(AWS_IOT_ENDPOINT, 8883, net);
+
+    // Create a message handler
+    client.onMessage(messageHandler);
+
+    Serial.println("\nConnecting to AWS IoT...");
+
+    while (!client.connect(THINGNAME)) {
+        Serial.print(".");
+        delay(100);
+    }
+
+    if(!client.connected()){
+        Serial.println("AWS IoT Timeout!");
+        return;
+    }
+
+    // Subscribe to a topic
+    client.subscribe(subscribeTopic);
+
+    Serial.println("AWS IoT Connected!");
+}
+
+void publishMessage(MQTTClient &client, float temp, float oxy, float humid, float heartRate)
+{
+  StaticJsonDocument<200> doc;
+
+  doc["oxygen"] = oxy;
+  doc["heartRate"] = heartRate;
+  doc["temperature"] = temp;
+  doc["humidity"] = humid;
+
+  char jsonBuffer[512];
+  serializeJson(doc, jsonBuffer); 
+
+  // Publish to AWS IoT
+  if (client.publish(publishTopic, jsonBuffer)) {
+    Serial.println("Message published successfully");
+  } else {
+    Serial.println("Message failed to publish");
+  }
+}
+
+
+void messageHandler(String &topic, String &payload) {
+  Serial.println("incoming: " + topic + " - " + payload);
+
+//  StaticJsonDocument<200> doc;
+//  deserializeJson(doc, payload);
+//  const char* message = doc["message"];
+}
+
 

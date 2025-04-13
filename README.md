@@ -24,3 +24,5 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 
 ## Reference
 - Arduino UNO R4 WIFI: https://docs.arduino.cc/hardware/uno-r4-wifi/
+- OLED Display: https://registry.platformio.org/libraries/adafruit/Adafruit%20SSD1306/examples
+- 
