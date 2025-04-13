@@ -1,5 +1,5 @@
-#ifndef _ARDUINOR4_H_
-#define _ARDUINOR4_H_
+#ifndef _ESP32_H_
+#define _ESP32_H_
 
 // files
 #include "arduino_secrets.h"

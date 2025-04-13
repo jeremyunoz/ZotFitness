@@ -4,7 +4,7 @@
 // files
 #include "tempHumSensor.h"
 #include "oled.h"
-#include "arduinoR4.h"
+#include "esp32.h"
 
 #define SDA_PIN 8
 #define SCL_PIN 9
