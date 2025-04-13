@@ -24,7 +24,7 @@ void messageHandler(String &topic, String &payload);
 // set up AWS IoT connection
 void connectAWS(WiFiClientSecure& net, MQTTClient& client);
 
-void publishMessage(MQTTClient &client, float temp, float oxy, float humid, float heartRate);
+void publishMessage(MQTTClient &client, float temp, int oxy, float humid, int heartRate);
 
 void messageHandler(String &topic, String &payload);
 

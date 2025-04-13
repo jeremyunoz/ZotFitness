@@ -65,7 +65,7 @@ void connectAWS(WiFiClientSecure& net, MQTTClient& client) {
     Serial.println("AWS IoT Connected!");
 }
 
-void publishMessage(MQTTClient &client, float temp, float oxy, float humid, float heartRate)
+void publishMessage(MQTTClient &client, float temp, int oxy, float humid, int heartRate)
 {
     struct tm timeinfo;
     char timeString[30] = "unknown";

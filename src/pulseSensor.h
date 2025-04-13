@@ -4,6 +4,8 @@
 #include "MAX30105.h"
 #include "heartRate.h"
 
+int getRealisticHeartRate(int prevHR);
+
 void setupHeartSensor(MAX30105& particleSensor);
 
 long getIRValue(MAX30105& particleSensor);

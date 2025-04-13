@@ -8,6 +8,21 @@ static float beatsPerMinute = 0;
 static int beatAvg = 0;
 
 // === Setup Function ===
+int getRealisticHeartRate(int prevHR) {
+  int variation = random(-3, 4); // small fluctuation
+  int hr = prevHR + variation;
+
+  // Add a chance for elevated heart rate (e.g., 10% of the time)
+  if (random(0, 100) < 10) {
+    hr = random(100, 140);
+  }
+
+  // Clamp heart rate to stay in healthy range
+  hr = constrain(hr, 60, 140);
+
+  return hr;
+}
+
 void setupHeartSensor(MAX30105& particleSensor) {
   Serial.println("Initializing MAX30105...");
 
