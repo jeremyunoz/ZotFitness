@@ -6,6 +6,7 @@ export default function PageTitle({ title }) {
       fontWeight={600}
       marginTop={8}
       marginLeft={"1%"}
+      marginBottom={"-2vh"}
       fontStyle={"italic"}
       color={"white"}
     >

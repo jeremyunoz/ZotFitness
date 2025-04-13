@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
+import genAI from "./config/gemini";
 
 export default function GeminiPanel() {
   const [messages, setMessages] = useState([
@@ -20,17 +21,37 @@ export default function GeminiPanel() {
   ]);
   const [userInput, setUserInput] = useState("");
 
+  function filterResp(rawResponse) {
+    const plainText = rawResponse
+      .replace(/\*\*(.*?)\*\*/g, "$1") // bold
+      .replace(/\*(.*?)\*/g, "$1") // italics
+      .replace(/`(.*?)`/g, "$1"); // code
+    console.log("plainText", plainText);
+    return plainText;
+  }
+
+  async function runGemini() {
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const result = await model.generateContent(userInput);
+      const response = result.response;
+      const filteredResp = filterResp(response.text());
+
+      setMessages((messages) => [
+        ...messages,
+        { sender: "ai", text: filteredResp },
+      ]);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   function handleSend() {
     if (!userInput.trim()) return;
     const newMessages = [...messages, { sender: "user", text: userInput }];
-    setMessages([
-      ...newMessages,
-      {
-        sender: "ai",
-        text: "This is a sample AI response. I’ll give you real insights soon!",
-      },
-    ]);
+    setMessages(newMessages);
     setUserInput("");
+    runGemini();
   }
 
   return (
@@ -77,7 +98,9 @@ export default function GeminiPanel() {
           height="10vh"
         />
         <IconButton
-          onClick={handleSend}
+          onClick={() => {
+            handleSend();
+          }}
           aria-label="send"
           variant={"ghost"}
           _hover={{ bg: "white" }}
