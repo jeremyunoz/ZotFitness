@@ -103,7 +103,7 @@ export default function Dashboard() {
               paddingLeft={"1%"}
               alignSelf="flex-start"
             >
-              {metrics
+              {metrics.length > 0
                 ? metrics.map((metric, index) => (
                     <Box key={index} width={"280px"}>
                       <MetricsCard
