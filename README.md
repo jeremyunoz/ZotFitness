@@ -6,20 +6,25 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 
 | Part                   | Description                                                        |
 | ---------------------- | ------------------------------------------------------------------ |
-| **PulseSensor**        | Measures heart rate (BPM).                                         |
-| **OLED Screens**       | Displays team logo: Zot!!!                                         |
+| **Pulse Sensor**       | Measures heart rate (BPM) and blood oxygen levels.                |
+| **OLED Display**       | Displays the team logo ("Zot!!!").              |
 | **AHT20**              | Senses ambient temperature and humidity.                           |
 | **ESP32-S3-DevKitC-1** | WiFi-enabled MCU that powers the system and handles communication. |
 
 ## 📦 Features
 
--  Real-time **heart rate monitoring**
--  Ambient **temperature and humidity tracking**
--  **Motion/activity detection** using accelerometer
--  Live data visualization on **Web UI**
--  Future support for **cloud integration** and AI-based health feedbacks
+- ✅ Real-time **heart rate & SpO2 monitoring**
+- 🌡️ Ambient **temperature and humidity tracking**
+- 🌐 Live **data visualization** on an intuitive Web UI
+- ☁️ **Cloud data storage** using **AWS IoT Core** and **DynamoDB**
+- 🤖 Integrated **AI assistant (Gemini)** to provide health insights and suggestions
 
-## References
+## 🧠 AI + Cloud Integration
+
+- **Gemini AI** is embedded in the Web UI to interpret sensor trends and offer personalized fitness or wellness tips.
+- Data collected from sensors is transmitted securely through **AWS IoT Core** and stored in **DynamoDB**, enabling scalable, real-time access for both users and the AI.
+
+## 📚 References
 
 - **ESP32-S3-DevKitC-1**  
   [Hardware Reference Guide](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide.html#hardware-reference)
