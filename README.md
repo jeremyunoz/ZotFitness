@@ -37,3 +37,27 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 
 - **OLED Display**  
   [Arduino Guide by Random Nerd Tutorials](https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/)
+
+## Running Frontend
+- cd into frontend
+```
+npm i
+```
+```
+npm i axios
+```
+```
+npm i react-router-dom
+```
+```
+npm i react-router-dom
+```
+```
+npm i @google/generative-ai@0.8.0
+```
+
+## Running DynamoDB
+- cd into DynamoDB
+```
+fastapi run main.py
+```
