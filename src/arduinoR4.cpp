@@ -2,7 +2,6 @@
 
 const char*  ssid = "BitHacks";
 const char*  pass = "BitHacks2025!";
-const char* thingName = "arduinoR4WiFi";
 const int port = 8883;
 
 int status = WL_IDLE_STATUS;
@@ -43,7 +42,7 @@ void connectAWS(WiFiClientSecure& net, MQTTClient& client) {
     net.setCertificate(AWS_CERT_CRT);
     net.setPrivateKey(AWS_CERT_PRIVATE);
 
-    client.begin(AWS_IOT_ENDPOINT, 8883, net);
+    client.begin(AWS_IOT_ENDPOINT, port, net);
 
     // Create a message handler
     client.onMessage(messageHandler);
@@ -68,22 +67,31 @@ void connectAWS(WiFiClientSecure& net, MQTTClient& client) {
 
 void publishMessage(MQTTClient &client, float temp, float oxy, float humid, float heartRate)
 {
-  StaticJsonDocument<200> doc;
+    struct tm timeinfo;
+    char timeString[30] = "unknown";
 
-  doc["oxygen"] = oxy;
-  doc["heartRate"] = heartRate;
-  doc["temperature"] = temp;
-  doc["humidity"] = humid;
+    if (getLocalTime(&timeinfo)) {
+        strftime(timeString, sizeof(timeString), "%Y-%m-%dT%H:%M:%SZ", &timeinfo);  // ISO 8601 format
+    } else {
+        Serial.println("Failed to get time");
+    }
 
-  char jsonBuffer[512];
-  serializeJson(doc, jsonBuffer); 
+    ArduinoJson::JsonDocument doc;
+    doc["timestamp"] = timeString;
+    doc["oxygen"] = oxy;
+    doc["heartRate"] = heartRate;
+    doc["temperature"] = temp;
+    doc["humidity"] = humid;
 
-  // Publish to AWS IoT
-  if (client.publish(publishTopic, jsonBuffer)) {
-    Serial.println("Message published successfully");
-  } else {
-    Serial.println("Message failed to publish");
-  }
+    char jsonBuffer[512];
+    serializeJson(doc, jsonBuffer); 
+
+    // Publish to AWS IoT
+    if (client.publish(publishTopic, jsonBuffer)) {
+        Serial.println("Message published successfully");
+    } else {
+        Serial.println("Message failed to publish");
+    }
 }
 
 
@@ -95,4 +103,15 @@ void messageHandler(String &topic, String &payload) {
 //  const char* message = doc["message"];
 }
 
+const char* ntpServer = "pool.ntp.org";
+const char* timeZone = "PST8PDT,M3.2.0/2,M11.1.0/2"; // Pacific Time with DST
 
+void setupTime() {
+  configTzTime(timeZone, ntpServer);  // set timezone and NTP server
+  struct tm timeinfo;
+  if (!getLocalTime(&timeinfo)) {
+    Serial.println("Failed to obtain time");
+    return;
+  }
+  Serial.println(&timeinfo, "Current time: %Y-%m-%d %H:%M:%S");
+}

@@ -8,6 +8,7 @@
 #include <MQTT.h>
 #include <WiFi.h> 
 #include <pgmspace.h>
+#include "time.h"
 #include <WiFiClientSecure.h>
 
 #define THINGNAME "esp32"
@@ -26,5 +27,7 @@ void connectAWS(WiFiClientSecure& net, MQTTClient& client);
 void publishMessage(MQTTClient &client, float temp, float oxy, float humid, float heartRate);
 
 void messageHandler(String &topic, String &payload);
+
+void setupTime();
 
 #endif

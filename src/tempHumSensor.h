@@ -5,8 +5,8 @@
 
 void setupAHT20();
 
-int getTemperature();
+float getTemperature();
 
-int getHumidity();
+float getHumidity();
 
 #endif

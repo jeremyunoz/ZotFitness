@@ -38,5 +38,8 @@ void setupOLED();
 
 void printOLED(int temp, int humid, int HeartRate);
 
+void displayData(int temp, int humid, int HeartRate, int x, int y);
+
+void displayIcons(int x);
 
 #endif //EOF OLED.h

@@ -20,15 +20,11 @@ void setup() {
   Wire.begin(SDA_PIN, SCL_PIN);
   Serial.begin(115200);
   configureWifi();
+  setupTime();
   setupAHT20();
   setupOLED();
 
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0, 0);
   IPAddress ip = WiFi.localIP();
-  display.display();
   
   connectAWS(net, client);
 }
@@ -39,11 +35,15 @@ void loop() {
   heartRate = 15;
   oxygen = 76;
   Serial.println("------Collecting Data------");
-  Serial.println(temperature);
-  Serial.println(humid);
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println("C");
+  Serial.print("Humidity: ");
+  Serial.print(humid);
+  Serial.println("%");
 
-  printOLED(temperature, humid, 100);
+  printOLED(temperature, humid, heartRate);
   publishMessage(client, temperature, heartRate, humid, oxygen);
   client.loop();
-  delay(1000);
+  delay(3000);
 }
