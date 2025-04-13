@@ -50,8 +50,9 @@ npm i @google/generative-ai@0.8.0
 ## Running DynamoDB
 - cd into DynamoDB
 ```
-pip install "fastapi[standard]"
 source .venv/bin/activate
+pip install boto3
+pip install "fastapi[standard]"
 fastapi run main.py
 ```
 - manually add keyconfig.py to enter your AWS security
