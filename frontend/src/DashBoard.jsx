@@ -9,7 +9,7 @@ import { FaHeart, FaTemperatureHigh, FaTint, FaWater } from "react-icons/fa";
 export default function Dashboard() {
   const metrics = [
     { title: "Pulse", icon: FaHeart, data: "72", unit: "bpm" },
-    { title: "SPo2", icon: FaTint, data: "98", unit: "%" },
+    { title: "SPo2", icon: FaTint, data: "98", unit: "mmHg" },
     {
       title: "Ambient Temperature",
       icon: FaTemperatureHigh,

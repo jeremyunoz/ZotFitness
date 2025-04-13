@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import boto3
 import keyconfig as keys
+import boto3
 
 app = FastAPI()
 
