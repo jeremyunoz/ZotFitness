@@ -11,6 +11,7 @@
 
 // var
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+// MAX30105 particleSensor;
 WiFiClientSecure net = WiFiClientSecure();
 MQTTClient client = MQTTClient(256);
 
@@ -32,8 +33,8 @@ void setup() {
 void loop() {
   temperature = getTemperature();
   humid = getHumidity();
-  heartRate = 15;
-  oxygen = 76;
+  heartRate = 85;
+  oxygen = 85;
   Serial.println("------Collecting Data------");
   Serial.print("Temperature: ");
   Serial.print(temperature);
@@ -43,7 +44,7 @@ void loop() {
   Serial.println("%");
 
   printOLED(temperature, humid, heartRate);
-  publishMessage(client, temperature, heartRate, humid, oxygen);
+  publishMessage(client, temperature, oxygen, humid, heartRate);
   client.loop();
-  delay(3000);
+  delay(10000);
 }
