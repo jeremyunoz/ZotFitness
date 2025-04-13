@@ -24,6 +24,7 @@ void setup() {
   setupTime();
   setupAHT20();
   setupOLED();
+  testdrawbitmap();
 
   IPAddress ip = WiFi.localIP();
   
@@ -43,7 +44,6 @@ void loop() {
   Serial.print(humid);
   Serial.println("%");
 
-  printOLED(temperature, humid, heartRate);
   publishMessage(client, temperature, oxygen, humid, heartRate);
   client.loop();
   delay(10000);
