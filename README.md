@@ -44,7 +44,6 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 npm i
 npm i axios
 npm i react-router-dom
-npm i react-router-dom
 npm i @google/generative-ai@0.8.0
 ```
 
