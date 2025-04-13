@@ -1,28 +1,13 @@
 import { Table } from "@chakra-ui/react";
-import axios from "axios";
-import { useState } from "react";
 
-export default function DataTable() {
-  const [metricsData, setMetricsData] = useState([]);
-
-  function fetchAllUserMetrics() {
-    axios
-      .get("http://localhost:8000/getAllUserInfo")
-      .then((resp) => {
-        setMetricsData(resp.data.items);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
+export default function DataTable({ metricsData }) {
   return (
     <Table.ScrollArea
       borderWidth="1px"
       rounded="md"
       width="130vh"
       height={"68vh"}
-      marginTop={8}
+      marginTop={5}
       borderColor={"gray.500"}
       onClick={() => {
         fetchAllUserMetrics();
