@@ -42,22 +42,16 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 - cd into frontend
 ```
 npm i
-```
-```
 npm i axios
-```
-```
 npm i react-router-dom
-```
-```
 npm i react-router-dom
-```
-```
 npm i @google/generative-ai@0.8.0
 ```
 
 ## Running DynamoDB
 - cd into DynamoDB
 ```
+pip install "fastapi[standard]"
+source .venv/bin/activate
 fastapi run main.py
 ```
