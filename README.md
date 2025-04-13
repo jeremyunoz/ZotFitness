@@ -54,3 +54,6 @@ pip install "fastapi[standard]"
 source .venv/bin/activate
 fastapi run main.py
 ```
+- manually add keyconfig.py to enter your AWS security
+- ACCESS_KEY_ID & ACCESS_SECRET_KEY
+
