@@ -26,21 +26,15 @@ void setupAHT20() {
     aht_humidity->printSensorDetails();
 }
 
-int getTemperature(){
+float getTemperature(){
     // Get humidity and temperature readings
     aht_temp->getEvent(&temp);
-    Serial.print("Temperature: ");
-    Serial.print(temp.temperature);
-    Serial.println("C");
     return temp.temperature;
 }
 
-int getHumidity(){
+float getHumidity(){
     // Get humidity and temperature readings
     aht_humidity->getEvent(&humidity);
-    Serial.print("Humidity: ");
-    Serial.print(humidity.relative_humidity);
-    Serial.println("%");
     return humidity.relative_humidity;
 }
 
