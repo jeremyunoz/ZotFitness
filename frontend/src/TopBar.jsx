@@ -20,8 +20,8 @@ export default function TopBar() {
   const [userName, setUserId] = useState("");
 
   function handleSave() {
-    console.log(`saved ${userName}`);
     CreateItem(userName);
+    console.log(`saved ${userName}`);
   }
 
   return (

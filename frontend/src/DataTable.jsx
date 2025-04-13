@@ -1,15 +1,20 @@
 import { Table } from "@chakra-ui/react";
+import { FetchItem } from "./FetchFromDB";
+
 
 export default function DataTable() {
+  const item = FetchItem();
+  console.log(item.userID);
+
   const metricsData = [
-    {
-      userId: 1,
-      userName: "james",
-      pulse: 33,
-      SPo2: 999.99,
-      amb_temp: 23,
-      amb_humidity: 45,
-    },
+    // {
+    //   userId: item.userID,
+    //   userName: item.userName,
+    //   pulse: item.HeartRate,
+    //   SPo2: 999.99,
+    //   amb_temp: 23,
+    //   amb_humidity: 45,
+    // },
     {
       userId: 2,
       userName: "jeremy",
@@ -33,7 +38,7 @@ export default function DataTable() {
       SPo2: 999.99,
       amb_temp: 23,
       amb_humidity: 45,
-    },
+    }
   ];
 
   return (
