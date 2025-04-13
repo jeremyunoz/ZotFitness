@@ -19,9 +19,16 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
 -  Live data visualization on **Web UI**
 -  Future support for **cloud integration** and AI-based health feedbacks
 
-## Reference
+## References
 
--  ESP32-S3-DevKitC-1: https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide.html#hardware-reference
--  Adafruit AHT20 Temperature & Humidity Sensor: https://learn.adafruit.com/adafruit-aht20/arduino
--  Pulse and Proximity Sensor: https://registry.platformio.org/libraries/sparkfun/SparkFun%20MAX3010x%20Pulse%20and%20Proximity%20Sensor%20Library
--  OLED display: https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/
+- **ESP32-S3-DevKitC-1**  
+  [Hardware Reference Guide](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide.html#hardware-reference)
+
+- **Adafruit AHT20 Temperature & Humidity Sensor**  
+  [Arduino Guide](https://learn.adafruit.com/adafruit-aht20/arduino)
+
+- **SparkFun MAX3010x Pulse and Proximity Sensor**  
+  [PlatformIO Library](https://registry.platformio.org/libraries/sparkfun/SparkFun%20MAX3010x%20Pulse%20and%20Proximity%20Sensor%20Library)
+
+- **OLED Display**  
+  [Arduino Guide by Random Nerd Tutorials](https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/)
