@@ -55,5 +55,5 @@ void loop() {
 
   publishMessage(client, temperature, oxygen, humid, heartRate);
   client.loop();
-  delay(10000);
+  delay(3000);
 }
