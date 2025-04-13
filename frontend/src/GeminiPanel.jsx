@@ -11,8 +11,23 @@ import {
 import { useState } from "react";
 import { RiSendPlaneFill } from "react-icons/ri";
 import genAI from "./config/gemini";
+import axios from "axios";
+import { useEffect } from "react";
 
 export default function GeminiPanel() {
+  const [metricsData, setMetricsData] = useState([]);
+
+  function fetchAllUserMetrics() {
+    axios
+      .get("http://localhost:8000/getAllUserInfo")
+      .then((resp) => {
+        setMetricsData(resp.data.items);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   const [messages, setMessages] = useState([
     {
       sender: "ai",
@@ -20,6 +35,7 @@ export default function GeminiPanel() {
     },
   ]);
   const [userInput, setUserInput] = useState("");
+  const [historyInput, setHistoryInput] = useState([]);
 
   function filterResp(rawResponse) {
     const plainText = rawResponse
@@ -30,10 +46,18 @@ export default function GeminiPanel() {
     return plainText;
   }
 
-  async function runGemini() {
+  useEffect(() => {
+    fetchAllUserMetrics();
+  }, []);
+
+  async function runGemini(inputText) {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-      const result = await model.generateContent(userInput);
+      if (!userInput) {
+        var inputText = historyInput.trim() + JSON.stringify(metricsData);
+      }
+      console.log("inputText: ", inputText);
+      const result = await model.generateContent(inputText);
       const response = result.response;
       const filteredResp = filterResp(response.text());
 
@@ -47,11 +71,14 @@ export default function GeminiPanel() {
   }
 
   function handleSend() {
-    if (!userInput.trim()) return;
-    const newMessages = [...messages, { sender: "user", text: userInput }];
+    const inputText = userInput.trim() || historyInput.trim();
+    if (!inputText) return;
+
+    const newMessages = [...messages, { sender: "user", text: inputText }];
     setMessages(newMessages);
     setUserInput("");
-    runGemini();
+    setHistoryInput("");
+    runGemini(inputText);
   }
 
   return (
@@ -89,18 +116,43 @@ export default function GeminiPanel() {
           ))}
         </Stack>
       </Card.Body>
-      <Box mt={3} display="flex" gap={2} alignItems="center">
+      <Box display="flex" gap={2} flexWrap="wrap" zIndex={1}>
+        {["Workout Plan", "Diet Tips", "Motivation", "Track Progress"].map(
+          (label) => (
+            <Button
+              key={label}
+              size="xs"
+              variant="solid"
+              backgroundColor={"black"}
+              color={"white"}
+              onClick={() => {
+                const promptText =
+                  "Best " + label + " with following body metrics in history";
+                setHistoryInput(promptText);
+              }}
+            >
+              {label}
+            </Button>
+          )
+        )}
+      </Box>
+      <Box
+        mt={3}
+        display="flex"
+        gap={2}
+        alignItems="center"
+        position="relative"
+        width="100%"
+      >
         <Textarea
           placeholder="Type your message..."
-          value={userInput}
+          value={userInput || historyInput}
           color={"black"}
           onChange={(e) => setUserInput(e.target.value)}
           height="10vh"
         />
         <IconButton
-          onClick={() => {
-            handleSend();
-          }}
+          onClick={handleSend}
           aria-label="send"
           variant={"ghost"}
           _hover={{ bg: "white" }}
