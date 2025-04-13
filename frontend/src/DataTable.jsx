@@ -1,54 +1,21 @@
 import { Table } from "@chakra-ui/react";
 
-export default function DataTable() {
-  const metricsData = [
-    {
-      userId: 1,
-      userName: "james",
-      pulse: 33,
-      SPo2: 999.99,
-      amb_temp: 23,
-      amb_humidity: 45,
-    },
-    {
-      userId: 2,
-      userName: "jeremy",
-      pulse: 33,
-      SPo2: 999.99,
-      amb_temp: 23,
-      amb_humidity: 45,
-    },
-    {
-      userId: 3,
-      userName: "es",
-      pulse: 33,
-      SPo2: 999.99,
-      amb_temp: 23,
-      amb_humidity: 45,
-    },
-    {
-      userId: 4,
-      userName: "kevlin",
-      pulse: 33,
-      SPo2: 999.99,
-      amb_temp: 23,
-      amb_humidity: 45,
-    },
-  ];
-
+export default function DataTable({ metricsData }) {
   return (
     <Table.ScrollArea
       borderWidth="1px"
       rounded="md"
       width="130vh"
       height={"68vh"}
-      marginTop={8}
+      marginTop={5}
       borderColor={"gray.500"}
+      onClick={() => {
+        fetchAllUserMetrics();
+      }}
     >
       <Table.Root size="sm" stickyHeader interactive>
         <Table.Header>
           <Table.Row bg="bg.subtle">
-            <Table.ColumnHeader>Name</Table.ColumnHeader>
             <Table.ColumnHeader>Pulse</Table.ColumnHeader>
             <Table.ColumnHeader>SPo2</Table.ColumnHeader>
             <Table.ColumnHeader>Ambient Temperature</Table.ColumnHeader>
@@ -57,13 +24,12 @@ export default function DataTable() {
         </Table.Header>
 
         <Table.Body>
-          {metricsData.map((item) => (
-            <Table.Row key={item.userId}>
-              <Table.Cell>{item.userName}</Table.Cell>
-              <Table.Cell>{item.pulse}</Table.Cell>
-              <Table.Cell>{item.SPo2}</Table.Cell>
-              <Table.Cell>{item.amb_temp}</Table.Cell>
-              <Table.Cell>{item.amb_humidity}</Table.Cell>
+          {metricsData.map((item, idx) => (
+            <Table.Row key={idx}>
+              <Table.Cell>{item.heartRate} bpm</Table.Cell>
+              <Table.Cell>{item.oxygen} mmHg</Table.Cell>
+              <Table.Cell>{item.temperature} °C</Table.Cell>
+              <Table.Cell>{item.humidity} %</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
