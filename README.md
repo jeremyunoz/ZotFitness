@@ -39,8 +39,8 @@ ZotFitness is a health-focused embedded IoT system designed to help users monito
   [Arduino Guide by Random Nerd Tutorials](https://randomnerdtutorials.com/guide-for-oled-display-with-arduino/)
 
 ## Running Frontend
-- cd into frontend
 ```
+cd frontend
 npm i
 npm i axios
 npm i react-router-dom
@@ -48,13 +48,13 @@ npm i @google/generative-ai@0.8.0
 ```
 
 ## Running DynamoDB
-- cd into DynamoDB
 ```
+cd DynamoDB
 source .venv/bin/activate
 pip install boto3
 pip install "fastapi[standard]"
 fastapi run main.py
 ```
 - manually add keyconfig.py to enter your AWS security
-- ACCESS_KEY_ID & ACCESS_SECRET_KEY
+  - ACCESS_KEY_ID & ACCESS_SECRET_KEY
 
