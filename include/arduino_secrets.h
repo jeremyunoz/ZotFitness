@@ -6,12 +6,12 @@ extern const char* ssid;
 extern const char* pass;
 
 // aws information
-const char MQTT_TOPIC[]  = "fitnessData";
-const char AWS_IOT_ENDPOINT[] = "a3jw3q5y1tveyt-ats.iot.us-west-1.amazonaws.com";
+const char MQTT_TOPIC[]  = "fitnessData"; 
+const char AWS_IOT_ENDPOINT[] = "your end-point"; // need to modify based on your AWS IoT Core
 
 
 // MQTT Client ID 
-const char clientId[] = "esp32";
+const char clientId[] = "esp32";  // need to modify based on your AWS IoT Core
 
 // MQTT Topics
 const char publishTopic[] = "fitnessData";         // Topic to publish your data (e.g., heart rate, temperature)
@@ -21,79 +21,21 @@ const char subscribeTopic[] = "fitnessCommands"; // Topic to listen to, if any
 // Device Certificate
 static const char AWS_CERT_CRT[] = R"KEY(
 -----BEGIN CERTIFICATE-----
-MIIDWjCCAkKgAwIBAgIVAL46l2V6kNQ61vUA9HafSjjNRZ5MMA0GCSqGSIb3DQEB
-CwUAME0xSzBJBgNVBAsMQkFtYXpvbiBXZWIgU2VydmljZXMgTz1BbWF6b24uY29t
-IEluYy4gTD1TZWF0dGxlIFNUPVdhc2hpbmd0b24gQz1VUzAeFw0yNTA0MTMwMDMy
-MDBaFw00OTEyMzEyMzU5NTlaMB4xHDAaBgNVBAMME0FXUyBJb1QgQ2VydGlmaWNh
-dGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCygFOpp74oPvjySPwy
-vkwTZwbD13z6kIgZh+LDNwCWw2Q/B0LOrTgHV7VRTl9RbbOTFEngO0QiFq5gnMpr
-F0gLZp1fMGWcc2fWHusB3Qv3Yb4u7HSp6kHS5Csq7NOu0w2UlGGdp8e3BVggRDV6
-brQEakQBmuh6u5IbeSq0DQrZpU6/6IsfT+V/qk9gYW2lgY4dSjVOaQ5qyI3hoLTi
-s809FZJeGVCGcH8/t7A6bQrvnMNLDbC4LE4qD1aZ4SvbzglDO1stQKoJDdMRLbjo
-o1WTUJWnBEnHZ43VQqM/KY3YaUtvfcLQWcwS9zvp5LW8V2FjmUfzor7jw5DubthQ
-pQnTAgMBAAGjYDBeMB8GA1UdIwQYMBaAFGG6MWvTgkf2Ky0vwXmrIjE9e+9XMB0G
-A1UdDgQWBBRif5BF4bF8mlNKjpKc+ksnjsngXTAMBgNVHRMBAf8EAjAAMA4GA1Ud
-DwEB/wQEAwIHgDANBgkqhkiG9w0BAQsFAAOCAQEAF5JRQLSd68jwaNiB2f0tM9Zt
-HGX2njThUqckYlScSJXx/1nGZVbGlr/RrlplvvGyk7tlK8ZH7v/YWSJ92SAPocDy
-aGQ42mbKHG62vDlJIMTd9Et46T+9OqzGdDfvw0SldmRLjEMdoA4FACtGRHfB7fr/
-7w7s3QiDuZ5QlmXKP0Mth7h4qnUJHXVFZucL0Kdnlu6wPCNPpc3c1i5Z/jYrFk6W
-+gpCCCee5QhVNdqevYoZsHPBFAgUHnWgfx7qDvmzZ3zASKx425hvgMomuS2GL6+M
-SnBLJG5nUzZofOgJesEB1/dQxYfrsU4Q/HueNJdaUDuUxDDJMXzXjlRVjx08nA==
+//add your own Device Certificate
 -----END CERTIFICATE-----
 )KEY";
 
 // Device Private Key
 static const char AWS_CERT_PRIVATE[] = R"KEY(
 -----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAsoBTqae+KD748kj8Mr5ME2cGw9d8+pCIGYfiwzcAlsNkPwdC
-zq04B1e1UU5fUW2zkxRJ4DtEIhauYJzKaxdIC2adXzBlnHNn1h7rAd0L92G+Lux0
-qepB0uQrKuzTrtMNlJRhnafHtwVYIEQ1em60BGpEAZroeruSG3kqtA0K2aVOv+iL
-H0/lf6pPYGFtpYGOHUo1TmkOasiN4aC04rPNPRWSXhlQhnB/P7ewOm0K75zDSw2w
-uCxOKg9WmeEr284JQztbLUCqCQ3TES246KNVk1CVpwRJx2eN1UKjPymN2GlLb33C
-0FnMEvc76eS1vFdhY5lH86K+48OQ7m7YUKUJ0wIDAQABAoIBABDJNpTmvGAmg9ys
-9mKDOL4+WwmBszQQ8WuNNsrq2jhTSZMPyL2M1o8CNX/e4eHTciarqsLWb/LQtTdK
-p1JozxKbZMM11uhehe5B3BHBysVJwMvC2rm72NLPOCwCN2niWQ2W4pMj2wkgDIiE
-QY8w5+beY2TPP3uDNhs1SsnBzDppQ9M7yxw0WlqOC7CyW/I/TqvmCNeFM+XCsDi0
-2tsq0SwrNnlRFPQ//6aYfPxDUl1mzUDFlyzttmAE+iEf9qyiOwwOx392IcLsjo8o
-H0IRcSCJmJ43rfBv22xEBYH2HqzzTRoAxfPjhQY+25mSrTplMdfmk9MEV+SRM0j5
-ojyyGgECgYEA7MSCqDgQQyYeaJGHTvcRexmUSDS3Q62iKGVFdopufMv0G/GSIbpy
-p5/c0XCoZhgnsvB5ku2aM664JEgRtY/UdiSbjp+oMaPNXSWeJPHL+zb0oWx6zHr3
-apAuhysi9kP/S908QbFjjWm7Vh3nHUU/Dy6iD1pncrG+uCmPN7CTBwECgYEAwQAw
-0+h5uRM0qUJTgmOzNBIDEstEvJ4OGOoY4jZOWv5C9Q1MpOrwgzxS2Zsw6G+QM+L/
-HvluM6pDoDm24Tuc3+lrxSY47FOLFbAiBkT8sA4SN5yDaxmajdoOwrrxFyQDOwqY
-5xHblLJLUJLdNDsDYD4rci/3gtJk46UPA4OaRNMCgYEAmJSDBtkqUbus+QJfylma
-IFR5pJakS68HwzSQMTZAwZfF9oQVAjtfS/rPmQEa5MBIRR6HmlIYf5nm/Sqcjv7j
-kkdBIAZvo53F6HMnmPNh2sCtoaGA+Wl9LGVCNsVrwHxNd5xZCpTAbQ9oNLUMjWZk
-nuoUcgR2iglVuOS/cMoP1gECgYAgdXXAzeJa2/4JUVxWG4pyAW1+5azDxBk+23Af
-6142M3jzWa9ANTsJ90U/z7fj/49TCqQ5g12jVslU0yAMtUfm6Iz1dT4xkMNdfGfc
-ghG1UkiCDdKUWpQBs2C0I1iUubvJXDjm87voQCwmeuy08g/ZSdtosuR/nf7VwlbK
-EoIJfQKBgQDLHum6lKWBDApiovzotzlhEKCnM0XiNbPfXCgPx7JDfhL7RrXoqEKY
-Rog4V58ETbFg6FCocdIu8k6HZRWs/EQAEDjlO2TI0oCs9JP+D/w2j/l8GKfjUVY2
-ZGfbitukg2g+InUeowsS9kYauCNfS9BTDIcgd95jomAntONq4hf+mA==
+//add your own Device Private Key
 -----END RSA PRIVATE KEY-----
 )KEY";
 
 // Amazon Root CA 1
 static const char AWS_CERT_CA[] = R"EOF(
 -----BEGIN CERTIFICATE-----
-MIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF
-ADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6
-b24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL
-MAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv
-b3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj
-ca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM
-9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw
-IFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6
-VOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L
-93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm
-jgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC
-AYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA
-A4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI
-U5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs
-N+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv
-o/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU
-5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy
-rqXRfboQnoZsG4q5WTP468SQvvG5
+//add your own Amazon Root CA 1 certificate
 -----END CERTIFICATE-----
 )EOF";
 
